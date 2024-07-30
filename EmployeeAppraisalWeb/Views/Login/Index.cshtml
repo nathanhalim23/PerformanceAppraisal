@@ -1,0 +1,29 @@
+﻿@{
+    Layout = "_LayoutLogin";
+}
+
+@model EmployeeAppraisalWeb.Models.User.UserLoginViewModel;
+
+<form asp-action="LoginAction" asp-controller="Login" method="post">
+    <div id="login-form">
+        <div>
+            <table>
+                <tr>
+                    <td>
+                        <input type="text" placeholder="username.." class="input" asp-for="@Model.Username" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="password" placeholder="password.." class="input" asp-for="@Model.Password" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div>
+            <button class="form-btn" type="submit">Log in</button>
+        </div>
+    </div>
+</form>

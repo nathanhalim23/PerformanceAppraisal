@@ -1,0 +1,120 @@
+﻿@model EmployeeAppraisalWeb.Models.Employee.EmployeeFormViewModel;
+
+<div id="form-header-title">
+    <span>PT. BUKIT MURIA JAYA</span>
+    <span>INDIVIDUAL PERFORMANCE SYSTEM</span>
+    <span>
+        Periode: January - December
+        <input type="number" id="periode-value"/>
+    </span>
+</div>
+
+<div id="form-header-info">
+    <div>
+        <table>
+            <tr>
+                <td>Nama</td>
+                <td>@Model.Name</td>
+            </tr>
+            <tr>
+                <td>Nik</td>
+                <td id="nik-value">@Model.Nik</td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <table>
+            <tr>
+                <td>Divisi / Departemen</td>
+                <td>@Model.Division</td>
+            </tr>
+            <tr>
+                <td>Jabatan</td>
+                <td>@Model.Position</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div>
+    <table id="indikator-utama-kerja">
+        
+        <thead>
+            <tr>
+                <td colspan="11" style="text-align:left">A. Indikator Utama Kerja</td>
+            </tr>
+
+            <tr>
+                <th>No</th>
+                <th>Strategic Objective</th>
+                <th>KPI</th>
+                <th>Unit of Measurement</th>
+                <th>Bobot</th>
+                <th>Polarization</th>
+                <th>Target</th>
+                <th>Actual</th>
+                <th>Tingkat Unjuk Kerja</th>
+                <th>Nilai Unjuk Kerja</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr>
+                <td id="number-one"></td>
+                <td>
+                    <input type="text" class="str-obj-input-class" />
+                </td>
+                <td>
+                    <select id="kpi-drop" class="kpi-drop-class">
+                        @foreach (var kpi in Model.KpiDropdown)
+                        {
+                            <option value="@kpi.Value">
+                                @kpi.Text
+                            </option>
+                        }
+                    </select>
+                </td>
+                <td>
+                    <input type="text" class="uom-input-class" />
+                </td>
+                <td>
+                    <input type="number" id="bobot"/>
+                </td>
+                <td>
+                    <select class="polar-drop-class">
+                        @foreach (var polar in Model.PolarisasiDropdown)
+                        {
+                            <option value="@polar.Value">
+                                @polar.Text
+                            </option>
+                        }
+                    </select>
+                </td>
+                <td>
+                    <input type="number" />
+                </td>
+                <td>
+                    <input type="number" class="aktual-input-class" />
+                </td>
+                <td>
+                    <input type="number" class="tuk-class"/>
+                </td>
+                <td></td>
+                <td>
+                    <button id="add-row-btn">+</button>
+                </td>
+            </tr>
+        </tbody>
+        
+        
+        <tfoot>
+            <tr>
+                <td colspan="9">Nilai A</td>
+                <td id="total-nilai-a"></td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<button id="submit-form-btn">Submit</button>
+<script src="~/js/form.js"></script>

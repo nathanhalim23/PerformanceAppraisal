@@ -1,0 +1,39 @@
+﻿
+@model EmployeeAppraisalWeb.Models.Employee.IndexEmployeeViewModel
+
+
+<table id="emp-table">
+    <thead>
+        <th>No</th>
+        <th>NIK</th>
+        <th>Name</th>
+        <th>Division</th>
+        <th>Position</th>
+        <th>Action</th>
+    </thead>
+    <tbody>
+        @if (Model.Employees.Count != 0)
+        {
+            int number = 1;
+            @foreach (var employees in Model.Employees)
+            {
+                <tr>
+                    <td>@number</td>
+                    <td>@employees.Nik</td>
+                    <td>@employees.Name</td>
+                    <td>@employees.Division</td>
+                    <td>@employees.Position</td>
+                    <td>
+                        <a asp-route-nik="@employees.Nik" asp-action="FormIndex">Form KPI</a>
+                    </td>
+                </tr>
+                number++;
+            }
+        }
+    </tbody>
+</table>
+
+<script src="~/js/employee.js"></script>
+
+
+
