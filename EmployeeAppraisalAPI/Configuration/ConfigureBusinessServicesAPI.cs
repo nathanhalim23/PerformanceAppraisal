@@ -14,6 +14,9 @@ namespace EmployeeAppraisalAPI.Configuration
             services.AddScoped<IPerformanceIndicatorRepository, PerformanceIndicatorRepository>();
             services.AddScoped<PerformanceIndicatorService>();
 
+            services.AddScoped<IBasicCompetencyRepository, BasicCompetencyRepository>();
+            services.AddScoped<BasicCompetencyService>();
+
             return services;
         }
     }

@@ -18,9 +18,7 @@ html {
 }
 
 body {
-    width: 100vw;
-    height: 100vh;
-    margin:0;
+    margin-bottom:60px;
 }
 
 .input {
@@ -78,6 +76,11 @@ body {
 
 
 /*Employee Page*/
+
+/*#form-main-container{
+    width:100%;
+    height:100%;
+}*/
 
 #emp-table {
     width: 80%;
@@ -155,3 +158,37 @@ body {
     cursor:pointer;
 }
 
+#kompetensi-dasar {
+    width: 1500px;
+    height: 150px;
+    margin-top: 50px;
+    margin-left: -130px;
+}
+
+#kompetensi-dasar th, #kompetensi-dasar label{
+    text-align: center;
+}
+
+#kompetensi-dasar td{
+    padding:10px 5px 10px 5px;
+}
+
+#kompetensi-dasar span{
+    text-align:justify;
+}
+
+.radio-basic-competency {
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    height: 100%
+}
+
+.kompetensi-class, .perilaku-class {
+    width:700px;
+}
+
+.td-radio{
+    width:200px;
+}

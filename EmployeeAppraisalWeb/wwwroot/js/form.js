@@ -1,11 +1,29 @@
 ﻿(() => {
 
+    let number = 1;
+    let dataTable = [];
+    let selectedRadioValues = [];
+
+    let numberOneTd = document.querySelector('#number-one');
+    let strategicObjectiveTd = document.querySelector('.str-obj-input-class');
+    let kpiIdTd = document.querySelector('.kpi-drop-class');
+    let unitOfMeasurementTd = document.querySelector('.uom-input-class');
+    let polarizationIdTd = document.querySelector('.polar-drop-class');
+    let actualTd = document.querySelector('.aktual-input-class');
+
+    numberOneTd.textContent = number;
+    strategicObjectiveTd.setAttribute('id', `str-obj-input${number}`);
+    kpiIdTd.setAttribute('id', `kpi-drop${number}`);
+    unitOfMeasurementTd.setAttribute('id', `uom-input${number}`);
+    polarizationIdTd.setAttribute('id', `polar-drop${number}`);
+    actualTd.setAttribute('id', `aktual-input${number}`);
+
     function sumBobot(tableId, columnIndex) {
         const indicatorTable = document.getElementById(tableId);
 
         let sum = 0;
 
-        for (let i = 1; i < indicatorTable.rows.length; i++) {
+        for (let i = 2; i < indicatorTable.rows.length-1; i++) {
             const row = indicatorTable.rows[i];
             const cell = row.cells[columnIndex];
             const bobot = cell.querySelector('input');
@@ -25,41 +43,116 @@
     function setNilaiUnjukKerja() {
         const indicatorTable = document.getElementById('indikator-utama-kerja');
 
-        for (let i = 1; i < indicatorTable.rows.length; i++) {
+        for (let i = 2; i < indicatorTable.rows.length-1; i++) {
             const row = indicatorTable.rows[i];
 
             const bobot = row.cells[4];
-            const bobotCell = bobot.querySelector('input');
+            const bobotCell = bobot.querySelector('#bobot');
 
             const tingkatUnjukKerja = row.cells[8];
-            const tingkatUnjukKerjaCell = tingkatUnjukKerja.querySelector('input');
 
-            const bobotValue = parseInt(bobotCell.value);
-            const tingkatUnjukKerjaValue = parseInt(tingkatUnjukKerjaCell.value);
+            const target = row.cells[6];
+            const targetCell = target.querySelector('input')
 
-            const nilaiUnjukKerja = bobotValue * tingkatUnjukKerjaValue;
-            resultCell.innerText = nilaiUnjukKerja;
+            const actual = row.cells[7];
+            const actualCell = actual.querySelector('input');
+
+            const resultCell = row.cells[9];
+
+            bobotCell.addEventListener(
+                'input',
+                function () {
+                    bobotCell.setAttribute('value', bobotCell.value);
+                }
+            );
+
+            targetCell.addEventListener(
+                'input',
+                function () {
+                    targetCell.setAttribute('value', targetCell.value);
+                }
+            );
+
+            actualCell.addEventListener(
+                'input',
+                function () {
+                    actualCell.setAttribute('value', actualCell.value);
+                    const actualCalculcation = parseInt(actualCell.value) / parseInt(targetCell.value) * 100;
+
+                    if (actualCalculcation > 130) {
+                        tingkatUnjukKerja.innerText = 5
+                    }
+                    else if (actualCalculcation <= 130 && actualCalculcation >= 110) {
+                        tingkatUnjukKerja.innerText = 4
+                    }
+                    else if (actualCalculcation <= 109 && actualCalculcation >= 91) {
+                        tingkatUnjukKerja.innerText = 3
+                    }
+                    else if (actualCalculcation <= 90 && actualCalculcation >= 71) {
+                        tingkatUnjukKerja.innerText = 2
+                    }
+                    else {
+                        tingkatUnjukKerja.innerText = 1
+                    }
+
+                    const nilaiUnjukKerja = parseInt(bobotCell.value) * parseInt(tingkatUnjukKerja.textContent);
+                    resultCell.innerText = nilaiUnjukKerja;
+
+                    
+                }
+            );
+
+            
         }
     }
 
 
-    let number = 1;
-    let dataTable = [];
+    function kompetensiDasarInsertValues() {
+        const radioRow1 = document.getElementsByName('row1');
+        const radioRow2 = document.getElementsByName('row2');
+        const radioRow3 = document.getElementsByName('row3');
+        const radioRow4 = document.getElementsByName('row4');
+        const radioRow5 = document.getElementsByName('row5');
 
-    let numberOneTd = document.querySelector('#number-one');
-    let strategicObjectiveTd = document.querySelector('.str-obj-input-class');
-    let kpiIdTd = document.querySelector('.kpi-drop-class');
-    let unitOfMeasurementTd = document.querySelector('.uom-input-class');
-    let polarizationIdTd = document.querySelector('.polar-drop-class');
-    let actualTd = document.querySelector('.aktual-input-class');
+        let customerFocus;
+        let integritas;
+        let kerjasamaTim;
+        let continuousImprovement;
+        let workExcellence;
 
-    numberOneTd.textContent = number;
-    strategicObjectiveTd.setAttribute('id', `str-obj-input${number}`);
-    kpiIdTd.setAttribute('id', `kpi-drop${number}`);
-    unitOfMeasurementTd.setAttribute('id', `uom-input${number}`);
-    polarizationIdTd.setAttribute('id', `polar-drop${number}`);
-    actualTd.setAttribute('id', `aktual-input${number}`);
+        for (let i = 0; i < radioRow1.length; i++) {
+            if (radioRow1[i].checked) {
+                customerFocus = parseInt(radioRow1[i].value);
+            }
+        }
 
+        for (let i = 0; i < radioRow2.length; i++) {
+            if (radioRow2[i].checked) {
+                integritas = parseInt(radioRow2[i].value);
+            }
+        }
+
+        for (let i = 0; i < radioRow3.length; i++) {
+            if (radioRow3[i].checked) {
+                kerjasamaTim = parseInt(radioRow3[i].value);
+            }
+        }
+
+        for (let i = 0; i < radioRow4.length; i++) {
+            if (radioRow4[i].checked) {
+                continuousImprovement = parseInt(radioRow4[i].value);
+            }
+        }
+
+        for (let i = 0; i < radioRow5.length; i++) {
+            if (radioRow5[i].checked) {
+                workExcellence = parseInt(radioRow5[i].value);
+            }
+        }
+
+        
+
+    }
     
    
     let addRowBtn = document.querySelector('#add-row-btn');
@@ -87,7 +180,7 @@
                     <input type="text" id="uom-input${number}"/>
                 </td>
                 <td>
-                    <input type="number"/>
+                    <input type="number" id="bobot"/>
                 </td>
                 <td>
                     <select id="polar-drop${number}">
@@ -98,11 +191,9 @@
                     <input type="number"/>
                 </td>
                 <td>
-                    <input type="number" id="aktual-input${number}"/>
-                </td>
-                <td>
                     <input type="number"/>
                 </td>
+                <td></td>
                 <td></td>
             `;
             
@@ -137,7 +228,7 @@
                 otherPolarDrop.appendChild(newPolarOptions);
             }
 
-
+            setNilaiUnjukKerja();
         }
     );
 
@@ -152,7 +243,7 @@
             const totalBobot = sumBobot('indikator-utama-kerja', 4);
 
             if (totalBobot != 100) {
-                alert('tes');
+                alert('Total Bobot harus 100%!');
             }
             else {
 
@@ -190,7 +281,7 @@
                                     unitOfMeasurement: td[3].querySelector('input').value,
                                     polarizationId: parseInt(td[5].querySelector('select').value),
                                     actual: parseInt(td[7].querySelector('input').value),
-                                    formId: 1
+                                    formId: formJSON.id
                                 };
 
                                 dataTable.push(rowData);
@@ -266,5 +357,6 @@
 
 
     setNilaiUnjukKerja();
+    getRadioValuesKompetensiDasar();
 
 })()
