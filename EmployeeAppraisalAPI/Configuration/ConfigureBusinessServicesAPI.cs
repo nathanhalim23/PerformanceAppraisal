@@ -19,5 +19,5 @@ namespace EmployeeAppraisalAPI.Configuration
 
             return services;
         }
-    }
+    }   
 }

@@ -63,7 +63,7 @@
         
             <tbody>
                 <tr>
-                    <td id="number-one"></td>
+                    <td>1</td>
                     <td>
                         <input type="text" class="str-obj-input-class" />
                     </td>
@@ -101,9 +101,174 @@
                     </td>
                     <td></td>
                     <td></td>
+                </tr>
+
+
+                <tr>
+                    <td>2</td>
                     <td>
-                        <button id="add-row-btn">+</button>
+                        <input type="text" class="str-obj-input-class" />
                     </td>
+                    <td>
+                        <select id="kpi-drop" class="kpi-drop-class">
+                            @foreach (var kpi in Model.KpiDropdown)
+                            {
+                                <option value="@kpi.Value">
+                                    @kpi.Text
+                                </option>
+                            }
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" class="uom-input-class" />
+                    </td>
+                    <td>
+                        <input type="number" id="bobot" />
+                    </td>
+                    <td>
+                        <select class="polar-drop-class">
+                            @foreach (var polar in Model.PolarisasiDropdown)
+                            {
+                                <option value="@polar.Value">
+                                    @polar.Text
+                                </option>
+                            }
+                        </select>
+                    </td>
+                    <td>
+                        <input type="number" />
+                    </td>
+                    <td>
+                        <input type="number" class="aktual-input-class" />
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+
+                <tr>
+                    <td>3</td>
+                    <td>
+                        <input type="text" class="str-obj-input-class" />
+                    </td>
+                    <td>
+                        <select id="kpi-drop" class="kpi-drop-class">
+                            @foreach (var kpi in Model.KpiDropdown)
+                            {
+                                <option value="@kpi.Value">
+                                    @kpi.Text
+                                </option>
+                            }
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" class="uom-input-class" />
+                    </td>
+                    <td>
+                        <input type="number" id="bobot" />
+                    </td>
+                    <td>
+                        <select class="polar-drop-class">
+                            @foreach (var polar in Model.PolarisasiDropdown)
+                            {
+                                <option value="@polar.Value">
+                                    @polar.Text
+                                </option>
+                            }
+                        </select>
+                    </td>
+                    <td>
+                        <input type="number" />
+                    </td>
+                    <td>
+                        <input type="number" class="aktual-input-class" />
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+
+                <tr>
+                    <td>4</td>
+                    <td>
+                        <input type="text" class="str-obj-input-class" />
+                    </td>
+                    <td>
+                        <select id="kpi-drop" class="kpi-drop-class">
+                            @foreach (var kpi in Model.KpiDropdown)
+                            {
+                                <option value="@kpi.Value">
+                                    @kpi.Text
+                                </option>
+                            }
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" class="uom-input-class" />
+                    </td>
+                    <td>
+                        <input type="number" id="bobot" />
+                    </td>
+                    <td>
+                        <select class="polar-drop-class">
+                            @foreach (var polar in Model.PolarisasiDropdown)
+                            {
+                                <option value="@polar.Value">
+                                    @polar.Text
+                                </option>
+                            }
+                        </select>
+                    </td>
+                    <td>
+                        <input type="number" />
+                    </td>
+                    <td>
+                        <input type="number" class="aktual-input-class" />
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+
+                <tr>
+                    <td>5</td>
+                    <td>
+                        <input type="text" class="str-obj-input-class" />
+                    </td>
+                    <td>
+                        <select id="kpi-drop" class="kpi-drop-class">
+                            @foreach (var kpi in Model.KpiDropdown)
+                            {
+                                <option value="@kpi.Value">
+                                    @kpi.Text
+                                </option>
+                            }
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" class="uom-input-class" />
+                    </td>
+                    <td>
+                        <input type="number" id="bobot" />
+                    </td>
+                    <td>
+                        <select class="polar-drop-class">
+                            @foreach (var polar in Model.PolarisasiDropdown)
+                            {
+                                <option value="@polar.Value">
+                                    @polar.Text
+                                </option>
+                            }
+                        </select>
+                    </td>
+                    <td>
+                        <input type="number" />
+                    </td>
+                    <td>
+                        <input type="number" class="aktual-input-class" />
+                    </td>
+                    <td></td>
+                    <td></td>
                 </tr>
             </tbody>
         

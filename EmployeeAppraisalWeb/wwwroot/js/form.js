@@ -1,28 +1,13 @@
 ﻿(() => {
 
-    let number = 1;
     let dataTable = [];
     let selectedRadioValues = [];
-
-    let numberOneTd = document.querySelector('#number-one');
-    let strategicObjectiveTd = document.querySelector('.str-obj-input-class');
-    let kpiIdTd = document.querySelector('.kpi-drop-class');
-    let unitOfMeasurementTd = document.querySelector('.uom-input-class');
-    let polarizationIdTd = document.querySelector('.polar-drop-class');
-    let actualTd = document.querySelector('.aktual-input-class');
-
-    numberOneTd.textContent = number;
-    strategicObjectiveTd.setAttribute('id', `str-obj-input${number}`);
-    kpiIdTd.setAttribute('id', `kpi-drop${number}`);
-    unitOfMeasurementTd.setAttribute('id', `uom-input${number}`);
-    polarizationIdTd.setAttribute('id', `polar-drop${number}`);
-    actualTd.setAttribute('id', `aktual-input${number}`);
 
     function sumBobot(tableId, columnIndex) {
         const indicatorTable = document.getElementById(tableId);
 
         let sum = 0;
-
+            
         for (let i = 2; i < indicatorTable.rows.length-1; i++) {
             const row = indicatorTable.rows[i];
             const cell = row.cells[columnIndex];
@@ -40,6 +25,26 @@
         return sum;
     }
 
+    function sumNilaiUnjukKerja(tableId, columnIndex) {
+        const indicatorTable = document.getElementById(tableId);
+
+        let sum = 0;
+
+        for (let i = 2; i < indicatorTable.rows.length - 1; i++) {
+            const row = indicatorTable.rows[i];
+            const cell = row.cells[columnIndex];
+            const cellValue = parseInt(cell.textContent);
+
+            if (!isNaN(cellValue)) {
+                sum += cellValue;
+            }
+
+        }
+
+        const totalNilaiA = document.querySelector('#total-nilai-a');
+        totalNilaiA.textContent = sum;
+    }
+
     function setNilaiUnjukKerja() {
         const indicatorTable = document.getElementById('indikator-utama-kerja');
 
@@ -47,7 +52,7 @@
             const row = indicatorTable.rows[i];
 
             const bobot = row.cells[4];
-            const bobotCell = bobot.querySelector('#bobot');
+            const bobotCell = bobot.querySelector('input');
 
             const tingkatUnjukKerja = row.cells[8];
 
@@ -80,32 +85,31 @@
                     const actualCalculcation = parseInt(actualCell.value) / parseInt(targetCell.value) * 100;
 
                     if (actualCalculcation > 130) {
-                        tingkatUnjukKerja.innerText = 5
+                        tingkatUnjukKerja.innerText = 5;
                     }
                     else if (actualCalculcation <= 130 && actualCalculcation >= 110) {
-                        tingkatUnjukKerja.innerText = 4
+                        tingkatUnjukKerja.innerText = 4;
                     }
                     else if (actualCalculcation <= 109 && actualCalculcation >= 91) {
-                        tingkatUnjukKerja.innerText = 3
+                        tingkatUnjukKerja.innerText = 3;
                     }
                     else if (actualCalculcation <= 90 && actualCalculcation >= 71) {
-                        tingkatUnjukKerja.innerText = 2
+                        tingkatUnjukKerja.innerText = 2;
                     }
                     else {
-                        tingkatUnjukKerja.innerText = 1
+                        tingkatUnjukKerja.innerText = 1;
                     }
 
                     const nilaiUnjukKerja = parseInt(bobotCell.value) * parseInt(tingkatUnjukKerja.textContent);
                     resultCell.innerText = nilaiUnjukKerja;
 
-                    
+                    sumNilaiUnjukKerja('indikator-utama-kerja', 9);
                 }
             );
 
             
         }
     }
-
 
     function kompetensiDasarInsertValues() {
         const radioRow1 = document.getElementsByName('row1');
@@ -155,85 +159,6 @@
     }
     
    
-    let addRowBtn = document.querySelector('#add-row-btn');
-    addRowBtn.addEventListener(
-        'click',
-        function () {
-
-            ++number;
-            
-            let tableTbody = document.querySelector('#indikator-utama-kerja tbody');
-
-            var newTr = document.createElement('tr');
-            newTr.innerHTML =
-            `
-                <td>${number}</td>
-                <td>
-                    <input type="text" id="str-obj-input${number}"/>
-                </td>
-                <td>
-                    <select id="kpi-drop${number}">
-                        
-                    </select>
-                </td>
-                <td>
-                    <input type="text" id="uom-input${number}"/>
-                </td>
-                <td>
-                    <input type="number" id="bobot"/>
-                </td>
-                <td>
-                    <select id="polar-drop${number}">
-                        
-                    </select>
-                </td>
-                <td>
-                    <input type="number"/>
-                </td>
-                <td>
-                    <input type="number"/>
-                </td>
-                <td></td>
-                <td></td>
-            `;
-            
-            tableTbody.appendChild(newTr);
-
-            let kpiDrop = document.querySelector('.kpi-drop-class');
-
-            for (let i = 0; i < kpiDrop.options.length; i++) {
-                var kpiOptions = kpiDrop.options[i];
-
-                let otherKpiDrop = document.querySelector(`#kpi-drop${number}`);
-                let newKpiOptions = document.createElement('option');
-                
-                newKpiOptions.text = kpiOptions.text;
-                newKpiOptions.value = kpiOptions.value;
-
-                otherKpiDrop.appendChild(newKpiOptions);
-            }
-
-
-            let polarDrop = document.querySelector('.polar-drop-class');
-
-            for (let j = 0; j < polarDrop.options.length; j++) {
-                var polarOptions = polarDrop.options[j];
-
-                let otherPolarDrop = document.querySelector(`#polar-drop${number}`);
-                let newPolarOptions = document.createElement('option');
-
-                newPolarOptions.text = polarOptions.text;
-                newPolarOptions.value = polarOptions.value;
-
-                otherPolarDrop.appendChild(newPolarOptions);
-            }
-
-            setNilaiUnjukKerja();
-        }
-    );
-
-    
-
         /* Form */
     let formSubmitBtn = document.querySelector('#submit-form-btn');
     formSubmitBtn.addEventListener(
@@ -301,6 +226,7 @@
 
                         }
 
+
                         let performanceIndicatorInsertAPI = () => {
                             const performanceIndicatorInsertUrl = 'http://localhost:8081/api/v1/performanceIndicator/Insert';
 
@@ -357,6 +283,5 @@
 
 
     setNilaiUnjukKerja();
-    getRadioValuesKompetensiDasar();
 
 })()
